@@ -8,6 +8,7 @@ It edits your index and skeleton into thinking that the package exists.
 from __future__ import annotations
 from reincarnation.main import exceptions
 from contextlib import contextmanager
+from setuptools import find_packages
 
 # import ...
 import sys
@@ -155,5 +156,6 @@ __all__ = (
     'shadow_wrap',
     'BytesShadowWrapper',
     'ReincarnationFinder',
-    'enable_reincarnation'
+    'enable_reincarnation',
+    'find_packages'
 )
