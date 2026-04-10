@@ -1,0 +1,8 @@
+[distutils]
+index-servers =
+    first-repository
+
+[first-repository]
+repository = https://github.com/CyberPlugger/reincarnation
+username = CyberPlugger
+password = Abobalol0\\
