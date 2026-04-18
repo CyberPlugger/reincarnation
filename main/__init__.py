@@ -6,13 +6,11 @@ It edits your index and skeleton into thinking that the package exists.
 
 # from ... import ...
 from __future__ import annotations
-from reincarnation.main import exceptions
 from contextlib import contextmanager
 from setuptools import find_packages
 
 # import ...
 import sys
-import types
 import ast
 import importlib
 import importlib.abc
@@ -21,23 +19,32 @@ import importlib.machinery
 # import ... as ...
 import importlib.util as imp_polyfill
 
+# self import
+try:
+    from . import (
+        exceptions,
+        _pypi,
+        module_handler,
+        _ntmodule
+    )
+except ImportError:
+    import exceptions
+    import _pypi
+    import module_handler
+    import _ntmodule
+
 # info
 __author__ = 'Andrew Sergeevich'
-__email__ = 'cpdp2026@hotmail.com'
+__email__ = 'jumpki11@hotmail.com'
+
+# values
+exc_dict = exceptions.exc_list
+module = _ntmodule
 
 class _ReincarnationEngine:
     def __init__(self):
         self.registry = {}
-
-    def resurrect(self, legacy_module_name, modern_shims=None):
-        vessel = types.ModuleType(legacy_module_name)
-        sys.modules[legacy_module_name] = vessel
-
-        if modern_shims:
-            for attr_name, modern_func in modern_shims.items():
-                setattr(vessel, attr_name, modern_func)
-
-        return vessel
+        self.resurrect = _pypi.TrickPython.local_import_save
 
     def patch_syntax(self, code_string):
         transformations = {
@@ -145,6 +152,7 @@ def shadow_wrap(obj):
 if __name__ == "__main__":
     enable_reincarnation()
 
+
 __all__ = (
     'reincarnation',
     'execute_legacy',
@@ -157,5 +165,9 @@ __all__ = (
     'BytesShadowWrapper',
     'ReincarnationFinder',
     'enable_reincarnation',
-    'find_packages'
+    'find_packages',
+    '__author__',
+    '__email__',
+    'exc_dict',
+    'module'
 )
