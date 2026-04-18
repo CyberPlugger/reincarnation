@@ -25,21 +25,25 @@ try:
         exceptions,
         _pypi,
         module_handler,
-        _ntmodule
+        _ntmodule,
+        version_check
     )
 except ImportError:
     import exceptions
     import _pypi
     import module_handler
     import _ntmodule
+    import version_check
 
 # info
 __author__ = 'Andrew Sergeevich'
 __email__ = 'jumpki11@hotmail.com'
+__version__ = '1.1.4'
 
 # values
 exc_dict = exceptions.exc_list
 module = _ntmodule
+cancel_update = version_check.cancel
 
 class _ReincarnationEngine:
     def __init__(self):
@@ -169,5 +173,7 @@ __all__ = (
     '__author__',
     '__email__',
     'exc_dict',
-    'module'
+    'module',
+    '__version__',
+    'cancel_update'
 )
